@@ -23,13 +23,12 @@ const Home: NextPage = () => {
     setFileSelected(event.target.files[0])
   }
 
-  function handleSendFile() {
+  async function handleSendFile() {
     alert("Open console for see the result")
     console.log("handleSendFile")
 
-    S3CustomClient
-      // @ts-ignore
-      .uploadFile(fileSelected, fileSelected.type, null, fileSelected.name, "public-read")
+    // @ts-ignore
+    await S3CustomClient.uploadFile(fileSelected, fileSelected.type, undefined, fileSelected.name, "authenticated-read")
       .then((data: UploadResponse) => console.log(data))
       .catch((err: any) => console.error(err))
   }
