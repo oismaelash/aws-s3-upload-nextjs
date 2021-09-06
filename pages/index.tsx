@@ -6,7 +6,7 @@ import { UploadResponse } from '../../../backend/aws-s3-upload-ash/dist/types'
 
 const Home: NextPage = () => {
 
-  const [fileSelected, setFileSelected] = useState({type: "", name: ""})
+  const [fileSelected, setFileSelected] = useState({ type: "", name: "" })
   const config = {
     bucketName: 'aws-s3-upload-ash',
     dirName: 'demo', /* optional - when use: e.g BUCKET_ROOT/dirName/fileName.extesion */
@@ -19,20 +19,18 @@ const Home: NextPage = () => {
   const S3CustomClient = new AWSS3UploadAsh(config);
 
   function onChangeFile(event: InputHTMLAttributes<HTMLInputElement>) {
-    // console.log(event.target.files[0])
-
     // @ts-ignore
     setFileSelected(event.target.files[0])
   }
 
   function handleSendFile() {
     console.log("handleSendFile")
-    
+
     S3CustomClient
-    // @ts-ignore
-    .uploadFile(fileSelected, fileSelected.type, null, fileSelected.name, "public-read")
-    .then((data: UploadResponse) => console.log(data))
-    .catch((err: any) => console.error(err))
+      // @ts-ignore
+      .uploadFile(fileSelected, fileSelected.type, null, fileSelected.name, "public-read")
+      .then((data: UploadResponse) => console.log(data))
+      .catch((err: any) => console.error(err))
   }
 
   return (
