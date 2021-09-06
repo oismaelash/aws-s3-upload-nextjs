@@ -24,6 +24,7 @@ const Home: NextPage = () => {
   }
 
   function handleSendFile() {
+    alert("Open console for see the result")
     console.log("handleSendFile")
 
     S3CustomClient
