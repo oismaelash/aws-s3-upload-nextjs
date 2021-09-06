@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import { InputHTMLAttributes, useState } from 'react'
 import styles from '../styles/Home.module.css'
 import AWSS3UploadAsh from 'aws-s3-upload-ash'
-import { UploadResponse } from '../../../backend/aws-s3-upload-ash/dist/types'
+import { UploadResponse } from 'aws-s3-upload-ash/dist/types'
 
 const Home: NextPage = () => {
 
