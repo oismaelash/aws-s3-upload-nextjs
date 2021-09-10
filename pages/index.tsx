@@ -28,7 +28,7 @@ const Home: NextPage = () => {
     console.log("handleSendFile")
 
     // @ts-ignore
-    await S3CustomClient.uploadFile(fileSelected, fileSelected.type, undefined, fileSelected.name, "authenticated-read")
+    await S3CustomClient.uploadFile(fileSelected, fileSelected.type, undefined, fileSelected.name, "public-read")
       .then((data: UploadResponse) => console.log(data))
       .catch((err: any) => console.error(err))
   }
