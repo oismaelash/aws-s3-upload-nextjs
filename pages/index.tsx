@@ -8,12 +8,12 @@ const Home: NextPage = () => {
 
   const [fileSelected, setFileSelected] = useState({ type: "", name: "" })
   const config = {
-    bucketName: 'aws-s3-upload-ash',
-    dirName: 'demo', /* optional - when use: e.g BUCKET_ROOT/dirName/fileName.extesion */
-    region: 'us-east-1',
+    bucketName: process.env.NEXT_PUBLIC_BUCKET_NAME,
+    // dirName: 'demo', /* optional - when use: e.g BUCKET_ROOT/dirName/fileName.extesion */
+    region: process.env.NEXT_PUBLIC_AWS_REGION,
     accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY,
     secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_KEY,
-    s3Url: 'https://aws-s3-upload-ash.s3.amazonaws.com/'
+    s3Url: process.env.NEXT_PUBLIC_BUCKET_URL
   }
   // @ts-ignore
   const S3CustomClient = new AWSS3UploadAsh(config);
@@ -27,10 +27,13 @@ const Home: NextPage = () => {
     alert("Open console for see the result")
     console.log("handleSendFile")
 
-    // @ts-ignore
-    await S3CustomClient.uploadFile(fileSelected, fileSelected.type, undefined, fileSelected.name, "public-read")
-      .then((data: UploadResponse) => console.log(data))
-      .catch((err: any) => console.error(err))
+    try {
+      // @ts-ignore
+      const response = await S3CustomClient.uploadFile(fileSelected, fileSelected.type, undefined, fileSelected.name, "public-read");
+      console.log(response, new Date().toString())
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (
